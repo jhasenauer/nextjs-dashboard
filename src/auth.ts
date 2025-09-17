@@ -5,6 +5,12 @@ import { z } from 'zod';
 import type { User } from '@/src/app/lib/definitions';
 import bcrypt from 'bcrypt';
 import postgres from 'postgres';
+import GitHub from 'next-auth/providers/github';
+import Google from 'next-auth/providers/google';
+ 
+if (!process.env.POSTGRES_URL) {
+  throw new Error('POSTGRES_URL is not set in environment variables.');
+}
  
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
  
@@ -44,5 +50,7 @@ export const { handlers: {GET, POST}, auth, signIn, signOut } = NextAuth({
         return null;
       },
     }),
+    GitHub,
+    Google
   ],
 });

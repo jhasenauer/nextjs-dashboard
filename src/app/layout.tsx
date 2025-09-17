@@ -1,6 +1,7 @@
 import '@/src/app/ui/global.css';
 import { inter } from '@/src/app/ui/fonts';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SessionProvider } from 'next-auth/react';
 
 export default function RootLayout({
   children,
@@ -10,7 +11,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        {children}
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );
